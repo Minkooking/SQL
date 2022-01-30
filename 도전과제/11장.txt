@@ -1,0 +1,37 @@
+
+-- 1
+select cust_id
+from Orders
+where order_num in (select order_num
+                    from OrderItems
+                    where OrderItems.item_price >= 10);
+                    
+-- 2
+select cust_id, order_date
+from Orders
+where order_num in (select order_num
+                  from OrderItems
+                  where OrderItems.prod_id = 'BR01')
+order by order_date;
+
+-- 3
+select cust_email
+from Customers
+where cust_id in (select cust_id
+                  from Orders
+                  where order_num in (select order_num
+                                      from OrderItems
+                                      where OrderItems.prod_id = 'BR01'));
+                                      
+-- 4
+select cust_id, (select sum(item_price * quantity)
+                 from OrderItems
+                 where Orders.order_num = OrderItems.order_num) as total_ordered
+from Orders
+order by total_ordered desc;
+
+-- 5
+select prod_name, (select sum(quantity)
+                   from OrderItems
+                   where OrderItems.prod_id = Products.prod_id) as quant_sold
+from Products;

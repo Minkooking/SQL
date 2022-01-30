@@ -1,0 +1,62 @@
+-- 1-1
+select cust_name, order_num
+from Customers, Orders
+where Customers.cust_id = Orders.cust_id
+order by cust_name, order_num;
+
+-- 1-2
+select cust_name, order_num
+from Customers inner join Orders
+on Customers.cust_id = Orders.cust_id
+order by cust_name, order_num;
+
+-- 2-1
+select cust_name, order_num, (select sum(item_price * quantity)
+                              from OrderItems
+                              where Orders.order_num = OrderItems.order_num) as OrderTotal
+from Customers, Orders
+where Customers.cust_id = Orders.cust_id
+order by cust_name, order_num;
+
+-- 2-2
+select cust_name, Orders.order_num, sum(item_price * quantity) as OrderTotal
+from Customers, Orders, OrderItems
+where Customers.cust_id = Orders.cust_id
+and Orders.order_num = OrderItems.order_num
+group by cust_name, Orders.order_num
+order by cust_name, order_num;
+
+
+-- 3
+select cust_id, order_date
+from Orders, OrderItems
+where Orders.order_num = OrderItems.order_num
+and OrderItems.prod_id = 'BR01'
+order by order_date;
+
+-- 4
+select cust_email
+from Customers 
+    inner join Orders on Customers.cust_id = Orders.cust_id 
+    inner join OrderItems on Orders.order_num = OrderItems.order_num
+where OrderItems.prod_id = 'BR01';
+
+
+
+-- 5-1
+select cust_name, sum(quantity*item_price) as total_price
+from Customers, Orders, OrderItems
+where Customers.cust_id = Orders.cust_id
+and Orders.order_num = OrderItems.order_num
+group by cust_name
+having sum(quantity*item_price) >= 1000
+order by cust_name;
+
+-- 5-2
+select cust_name, sum(quantity*item_price) as total_price
+from Customers
+    inner join Orders on Customers.cust_id = Orders.cust_id
+    inner join OrderItems on Orders.order_num = OrderItems.order_num
+group by cust_name
+having sum(quantity*item_price) >= 1000
+order by cust_name;

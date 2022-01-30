@@ -1,0 +1,32 @@
+-- 1
+select cust_name, order_num
+from Customers
+    inner join Orders on Customers.cust_id = Orders.cust_id;
+    
+-- 2
+select cust_name, order_num
+from Customers
+    left join Orders on Customers.cust_id = Orders.cust_id;
+    
+-- 3
+select prod_name, order_num
+from Products
+    left outer join OrderItems on Products.prod_id = OrderItems.prod_id
+order by prod_name;
+
+-- 4
+select prod_name, count(order_num) as orders
+from Products
+    left outer join OrderItems on Products.prod_id = OrderItems.prod_id
+group by prod_name
+order by prod_name;
+
+-- 5
+select * from Vendors;
+select * from Products;
+
+select Vendors.vend_id, count(prod_id) as counts
+from Vendors
+    left outer join Products on Vendors.vend_id = Products.vend_id
+group by Vendors.vend_id
+order by Vendors.vend_id;

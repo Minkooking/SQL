@@ -1,0 +1,2 @@
+create table OrdersBackup as select * from Orders;
+create table OrderItemsBackup as select * from OrderItems;
