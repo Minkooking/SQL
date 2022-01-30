@@ -1,0 +1,11 @@
+select cust_id
+from Customers;
+
+select distinct prod_id 
+from OrderItems;
+
+/* select *
+from Customers; */
+
+select cust_id
+from Customers;

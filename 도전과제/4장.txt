@@ -1,0 +1,20 @@
+-- 1번
+select prod_id, prod_name
+from Products
+where prod_price = 9.49;
+
+-- 2번
+select prod_id, prod_name
+from Products
+where prod_price >= 9;
+
+-- 3번
+select distinct order_num
+from OrderItems
+where quantity >= 100;
+
+-- 4번
+select prod_name, prod_price
+from Products
+where prod_price between 3 and 6
+order by prod_price;

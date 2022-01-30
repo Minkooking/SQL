@@ -1,0 +1,13 @@
+select cust_name
+from Customers
+order by cust_name desc;
+
+/* 2 */
+select cust_id, order_num
+from Orders
+order by cust_id, order_date desc;
+
+/* 3 */
+select quantity, item_price
+from OrderItems
+order by quantity desc, item_price desc;

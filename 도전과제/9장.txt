@@ -1,0 +1,10 @@
+select sum(quantity) as sum_quantity
+from OrderItems;
+
+select sum(quantity) as sum_quantity
+from OrderItems
+where prod_id = 'BR01';
+
+select max(prod_price) as max_price
+from Products
+where prod_price <= 10;
